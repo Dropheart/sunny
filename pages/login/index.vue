@@ -1,7 +1,7 @@
 <template>
 <main>
 <body class="bg-blue-bg">
-    <div class="flex flex-col justify-center h-screen max-w-96 space-y-2 mx-auto my-auto">
+    <div class="flex flex-col justify-center h-screen max-w-80 space-y-2 mx-auto my-auto">
         <h1 class="pl-1 text-white text-2xl">{{ signin ? "sign in" : "sign up" }} to sunny 🌻</h1>
         <div v-if="!signin" class="flex space-x-2">
             <TextInput class="shrink w-1/2" inputName="name" type="text"/>
