@@ -12,8 +12,9 @@
                 <div class="pl-2 my-auto">
                     <Button :buttonText="month + ' | ' + year"/>
                 </div>
-                <div class="ml-auto my-auto pr-2">
+                <div class="flex ml-auto my-auto pr-2 gap-4">
                     <!-- <Button buttonText="settings"/> -->
+                    <Button buttonText="Month"/>
                     <img class="cursor-pointer" src="assets/fi-rs-settings-sliders.svg"/>
                 </div>
             </div>
@@ -28,7 +29,13 @@
             </div>
         </div>
         <div class="flex row-span-11 col-span-4 col-start-2">
-
+            <div :class="`grid grid-rows-${days.length} w-full`">
+                <div class="flex" v-for="week in days">
+                    <div class="border w-full" v-for="day in week">
+                        <p :class="`${day.currentMonth ? 'text-white' : 'text-grey-text'} text-right pr-2`">{{day.day}}</p> 
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
