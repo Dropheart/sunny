@@ -14,7 +14,7 @@
                 </div>
                 <div class="flex ml-auto my-auto pr-2 gap-4">
                     <!-- <Button buttonText="settings"/> -->
-                    <Button buttonText="Month"/>
+                    <Button :buttonText="timescale"/>
                     <img class="cursor-pointer" src="assets/fi-rs-settings-sliders.svg"/>
                 </div>
             </div>
@@ -49,9 +49,8 @@
     
 <script setup lang="ts">
 const { year, month, computeDays }  = useCal(new Date())
-
 const days = computeDays()
-
 const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+const timescale = ref("Month")
 
 </script>
