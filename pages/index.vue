@@ -15,7 +15,7 @@
                 <div class="flex ml-auto my-auto pr-2 gap-4">
                     <!-- <Button buttonText="settings"/> -->
                     <Button :buttonText="timescale"/>
-                    <img class="cursor-pointer" src="assets/fi-rs-settings-sliders.svg"/>
+                    <img class="cursor-pointer" src="/fi-rs-settings-sliders.svg"/>
                 </div>
             </div>
         </div>

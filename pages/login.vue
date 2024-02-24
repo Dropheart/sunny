@@ -7,7 +7,7 @@
             <TextInput class="shrink w-1/2" inputName="name" type="text"/>
             <!-- <TextInput class="shrink w-1/2" inputName="surname" type="text"/> -->
         </div>
-        <p v-else="signin" class="text-grey-text cursor-pointer pl-1" @click="forgotPass()">forgot password?</p>
+        <p v-else class="text-grey-text cursor-pointer pl-1" @click="forgotPass()">forgot password?</p>
         <div class="space-y-2">
             <TextInput inputName="email" type="text"/>
             <TextInput inputName="password" type="password"/>
@@ -20,8 +20,8 @@
 </body>
 </main>
 </template>
-
-
+    
+    
 <script setup lang="ts">
 const signin = ref<Boolean>(true)
 
@@ -33,7 +33,3 @@ function confirm() {
     alert("Logged in")
 }
 </script>
-
-<style>
-
-</style>
