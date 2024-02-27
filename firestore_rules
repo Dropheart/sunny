@@ -1,0 +1,11 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+		
+    match /users/{userId} {
+    	allow create: if (userId == request.auth.uid) && (request.resource.data.size() == 2) && ('email' in request.resource.data) && ('firstName' in request.resource.data) && (request.resource.data.email == request.auth.token.email)
+    }
+    
+	}
+}
