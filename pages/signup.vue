@@ -1,5 +1,5 @@
 <template>
 <main>
-    <LogUp :login="true"/>
+    <LogUp :login="false"/>
 </main>
 </template>
