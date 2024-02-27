@@ -1,8 +1,6 @@
 <template>
 <main>
-<body class="bg-blue-bg overflow-hidden">
 <div class="grid h-screen grid-cols-5 grid-rows-12">
-    
     <div class="flex flex-col row-span-1 col-span-5">
         <div class="h-full grid grid-cols-5 divide-x-[1px]">
             <div class="flex w-full col-span-1">
@@ -13,7 +11,7 @@
                     <Button :buttonText="month + ' | ' + year"/>
                 </div>
                 <div class="flex ml-auto my-auto pr-2 gap-4">
-                    <!-- <Button buttonText="settings"/> -->
+                    <!-- <Button buttonText="settings"/> -->    
                     <Button :buttonText="timescale"/>
                     <img class="cursor-pointer" src="/fi-rs-settings-sliders.svg"/>
                 </div>
@@ -32,7 +30,7 @@
             <div class="flex">
                 <h1 class="border w-full text-center text-white py-1" v-for="day in weekDays"> {{ day }} </h1>
             </div>
-            <div :class="`grid size-full`">
+            <div class="grid size-full">
                 <div class="flex" v-for="week in days">
                     <div class="border w-full" v-for="day in week">
                         <p :class="`${day.currentMonth ? 'text-white' : 'text-grey-text'} text-right pr-2`">{{day.day}}</p> 
@@ -43,13 +41,11 @@
     </div>
 
 </div>
-</body>
 </main>
 </template>
     
 <script setup lang="ts">
-const { year, month, computeDays }  = useCal(new Date())
-const days = computeDays()
+const { year, month, days }  = useCal(new Date())
 const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 const timescale = ref("Month")
 
