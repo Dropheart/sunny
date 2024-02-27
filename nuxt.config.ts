@@ -8,6 +8,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
 
   },
+  app: {
+    pageTransition: { name: 'page', mode: 'out-in' }
+  },
   tailwindcss: {
     config: {
       theme: {
