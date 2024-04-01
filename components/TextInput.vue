@@ -1,8 +1,10 @@
 <template>
-    <div class="rounded-[10px] border-4 border-blue-green">
-        <input  class="w-full rounded-md bg-blue-input pl-2 font-inter placeholder-grey-text caret-grey-text text-white text-md"
+        <input class="rounded-md bg-blue-input pl-2 font-inter 
+        placeholder-grey-text caret-grey-text text-white text-md
+        ring-4 ring-blue-green outline-4 
+        focus:outline-none
+        "
                 :type="type" v-model="model" :id="inputName" :name="inputName" :placeholder="inputName">
-    </div>
 </template>
 
 <script setup lang="ts">
