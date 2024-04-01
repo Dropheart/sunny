@@ -7,13 +7,14 @@
                 <h1 class="text-white my-auto mx-auto text-2xl">sunny 🌻</h1>
             </div>
             <div class="flex max-h-full col-span-4 col-start-2">
-                <div class="pl-2 my-auto">
+                <div class="pl-4 my-auto">
                     <Button :buttonText="month + ' | ' + year"/>
                 </div>
                 <div class="flex ml-auto my-auto pr-2 gap-4">
                     <!-- <Button buttonText="settings"/> -->    
                     <Button :buttonText="timescale"/>
-                    <img class="cursor-pointer" src="/fi-rs-settings-sliders.svg"/>
+                    <img class="cursor-pointer" src="assets/fi-rs-settings-sliders.svg"/>
+                    <img class="cursor-pointer" src="assets/fi-rs-sign-out.svg" :onClick="logOut"/>
                 </div>
             </div>
         </div>
@@ -47,16 +48,17 @@
 <script setup lang="ts">
 const nuxt = useNuxtApp()
 const auth = nuxt.$auth
-const { redirectToLogIn } = useAuth()
+const { redirectToLogIn, logOut } = useAuth()
 
 const { year, month, days }  = useCal(new Date())
 const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 const timescale = ref("Month")
+const loading = ref<boolean>(true)
 
 onBeforeMount(async () => {
     // blur everything pre load? 
     if (await redirectToLogIn()) return;
-    // unblur? 
+    loading.value = false;
 })
 
 </script>

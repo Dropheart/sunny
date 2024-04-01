@@ -1,5 +1,5 @@
 import { FirebaseError } from 'firebase/app';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, type AuthError, type User, AuthErrorCodes, onAuthStateChanged } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, type AuthError, type User, AuthErrorCodes, onAuthStateChanged, signOut } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore'
 
 export default function() {
@@ -49,9 +49,15 @@ export default function() {
         return false;
     }
 
+    async function logOut() {
+        await signOut(auth)
+        navigateTo("login")
+    }
+
     return {
         createAccount,
         logIn,
-        redirectToLogIn
+        redirectToLogIn,
+        logOut
     }
 }
