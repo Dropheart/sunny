@@ -6,9 +6,8 @@
         </div>
         <div class="space-y-4">
             <p v-if="errorText != ''" class="text-grey-text -my-2 text-red-500">{{errorText}}</p>
-
             <TextInput class="w-full" v-model="email" inputName="email" type="email"/>            
-            <TextInput class="w-full" v-model="password" inputName="password" type="password" pattern=".{8,}"/>
+            <TextInput class="w-full" v-model="password" inputName="password" type="password" pattern=".{8,}" @keydown.enter="confirm"/>
         </div>
         <p v-if="login" class="text-grey-text cursor-pointer" @click="forgotPass()">forgot password?</p>
         <div class="flex">
