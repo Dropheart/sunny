@@ -45,8 +45,18 @@
 </template>
     
 <script setup lang="ts">
+const nuxt = useNuxtApp()
+const auth = nuxt.$auth
+const { redirectToLogIn } = useAuth()
+
 const { year, month, days }  = useCal(new Date())
 const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 const timescale = ref("Month")
+
+onBeforeMount(async () => {
+    // blur everything pre load? 
+    if (await redirectToLogIn()) return;
+    // unblur? 
+})
 
 </script>

@@ -24,18 +24,34 @@
 const props = defineProps({
     login: Boolean,
 })
-const { createAccount } = useAuth()
+const { createAccount, logIn } = useAuth()
+const route = useRoute()
 
 const name = defineModel<string>("name")
 const email = defineModel<string>("email")
 const password = defineModel<string>("password")
 
 function forgotPass() {
-    alert("sucks to be you")
+    // todo
 }
 
 async function confirm() {
-    // const user = await createAccount(name.value!, email.value!, password.value!)
-    alert("Logged in")
+    if (route.path == '/login') {
+        const user = await logIn(email.value!, password.value!)
+        if (user == null) {
+            // fail message
+        } else {
+            // some success message
+            navigateTo('') 
+        }
+    } else {
+        const user = await createAccount(name.value!, email.value!, password.value!)
+        if (user == null) {
+            // handle
+        } else {
+            // some success message
+            navigateTo('')
+        }
+    }
 }
 </script>
