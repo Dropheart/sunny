@@ -16,7 +16,7 @@ export default function() {
         })
     }
 
-    async function createAccount(name: string, email: string, password: string): Promise<User | null> {
+    async function createAccount(name: string, email: string, password: string): Promise<User> {
         try {
             const user = await createUserWithEmailAndPassword(auth, email, password)
             const userDoc = await setDoc(doc(db, "users", user.user.uid), {
@@ -25,19 +25,16 @@ export default function() {
             })
             return user.user
         } catch (e) {
-            if (e instanceof FirebaseError && e.code == AuthErrorCodes.CREDENTIAL_ALREADY_IN_USE) return null
-
             console.error(e)
             throw e
         }
     }
 
-    async function logIn(email: string, password: string): Promise<User | null> {
+    async function logIn(email: string, password: string): Promise<User> {
         try {
             const user = await signInWithEmailAndPassword(auth, email, password)
             return user.user
         } catch (e) {
-            if (e instanceof FirebaseError && e.code == AuthErrorCodes.INVALID_LOGIN_CREDENTIALS) return null;
             console.error(e)
             throw e
         }
