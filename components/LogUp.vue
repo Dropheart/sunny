@@ -33,7 +33,6 @@ const name = defineModel<string>("name")
 const email = defineModel<string>("email")
 const password = defineModel<string>("password")
 const errorText = ref<string>("")
-const passwordError = ref<string>("")
 
 function forgotPass() {
     if (email.value == undefined || !email.value.match(/.+@.+\..+/)) return errorText.value = "Invalid email."
