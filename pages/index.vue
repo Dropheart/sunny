@@ -1,9 +1,7 @@
 <template>
 <main>
 <div :class="`${modal ? 'opacity-100 visible' : 'opacity-0 invisible'} flex place-content-center fixed z-10 h-screen w-screen duration-300 ease-in`" @click="modal = false">
-    <div class="outline outline-2 outline-white my-auto p-2">
-        <p class="text-white"> TBD </p>
-    </div>
+    <EventModal @click.stop/>
 </div>
 
 <div :class="`${modal ? 'blur-sm' : ''} grid h-screen grid-cols-5 grid-rows-12 duration-300`">
