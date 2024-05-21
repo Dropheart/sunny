@@ -1,18 +1,22 @@
 <template>
-        <input class="rounded-md bg-blue-input pl-2 font-inter 
+    <div class="flex flex-col w-full">
+        <h1 v-if="titleAbove" class="font-inter text-white text-md pb-2 font-medium w-full">{{ inputName }}</h1>
+        <input class="rounded-md bg-blue-input pl-2 font-inter w-full
         placeholder-grey-text caret-grey-text text-white text-md
         ring-4 ring-blue-green outline-4 
         focus:ring-[#395b66] outline-none ease-in duration-200
         invalid:border-red-500 invalid:text-red-500 focus:invalid:ring-red-600 invalid:ring-red-700 invalid:bg-red-900
         "
-                :type="type" v-model="model" :id="inputName" :name="inputName" :placeholder="inputName">
+                :type="type" v-model="model" :id="id" :name="inputName" :placeholder="titleAbove ? '' : inputName">
+    </div>
 </template>
 
 <script setup lang="ts">
 const props = defineProps({
     inputName: String,
-    type: String
+    type: String,
+    id: String,
+    titleAbove: Boolean
 })
 const model = defineModel()
-
 </script>
