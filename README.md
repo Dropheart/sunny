@@ -4,7 +4,9 @@ Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introdu
 
 - Create a [Firebase](https://console.firebase.google.com/) project with Authentication and Firestore enabled
 - Rename example.env to .env and put in your Firebase credentials
-- Copy the rules in firestore_rules to your Firestore rules.
+- Not sure if you need to run firebase init. Tbd lol.
+- Run `firebase functions:secrets:set POSTMARK_API_KEY`, and set it to your API key.
+- `firebase deploy` for the rules n functions (eventually)
 
 ## Setup
 
