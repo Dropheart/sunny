@@ -12,7 +12,7 @@
             </div>
             <div class="flex max-h-full col-span-4 col-start-2">
                 <div class="pl-4 my-auto">
-                    <Button :buttonText="month + ' | ' + year"/>
+                    <Button :buttonText="currentMonth.month + ' | ' + currentMonth.year"/>
                 </div>
                 <div class="flex ml-auto my-auto pr-2 gap-4">
                     <!-- <Button buttonText="settings"/> -->
@@ -36,7 +36,7 @@
                 <h1 class="border w-full text-center text-white py-1" v-for="day in weekDays"> {{ day }} </h1>
             </div>
             <div class="grid size-full">
-                <div class="flex" v-for="week in days">
+                <div class="flex" v-for="week in currentMonth.days">
                     <div class="border w-full cursor-pointer hover:bg-white hover:bg-opacity-10 duration-300" @click="modal = true" v-for="day in week">
                         <p :class="`${day.currentMonth ? 'text-white' : 'text-grey-text'} text-right pr-2`">{{day.day}}</p> 
                     </div>
@@ -53,7 +53,9 @@ const nuxt = useNuxtApp()
 const auth = nuxt.$auth
 const { redirectToLogIn, logOut } = useAuth()
 
-const { year, month, days }  = useCal(new Date())
+const { CalendarLogic }  = useCal()
+const currentMonth = new CalendarLogic(new Date())
+
 const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 const timescale = ref("Month")
 const loading = ref<boolean>(true)
