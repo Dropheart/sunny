@@ -1,8 +1,8 @@
 <template>
     <div class="flex flex-col justify-center h-screen max-w-[19rem] space-y-2 mx-auto my-auto">
         <h1 class="text-white text-2xl">{{ login ? "sign in" : "sign up" }} to sunny 🌻</h1>
-        <div v-if="!login" class="flex space-x-2">
-            <TextInput v-model="name" class="my-1.5 w-1/2" inputName="name" id="name" type="text" pattern="\S.*"/>
+        <div v-if="!login" class="flex space-x-2 w-1/2">
+            <TextInput v-model="name" class="my-1.5" inputName="name" id="name" type="text" pattern="\S.*"/>
         </div>
         <div class="space-y-4">
             <p v-if="errorText != ''" class="text-grey-text -my-2 text-red-500">{{errorText}}</p>

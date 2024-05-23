@@ -1,6 +1,6 @@
 import { FirebaseError } from 'firebase/app';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, type AuthError, type User, AuthErrorCodes, onAuthStateChanged, signOut } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, type AuthError, type User, AuthErrorCodes, onAuthStateChanged, signOut, deleteUser } from 'firebase/auth';
+import { addDoc, doc, setDoc, collection } from 'firebase/firestore'
 
 export default function() {
     const nuxt = useNuxtApp()
@@ -17,14 +17,27 @@ export default function() {
     }
 
     async function createAccount(name: string, email: string, password: string): Promise<User> {
+        var user
         try {
-            const user = await createUserWithEmailAndPassword(auth, email, password)
+            user = await createUserWithEmailAndPassword(auth, email, password)
             const userDoc = await setDoc(doc(db, "users", user.user.uid), {
                 firstName: name,
                 email: email,
             })
+
+            const calendarRef = await addDoc(collection(db, `users/${user.user.uid}/calendars`), {
+                name: "Default Calendar",
+                color: "#3f3f3f"
+            })
+
+            const todoref = await addDoc(collection(db, `users/${user.user.uid}/todolists`), {
+                name: "Default List",
+                color: "#3f3f3f"
+            })
+
             return user.user
         } catch (e) {
+            if (user) deleteUser(user.user)
             console.error(e)
             throw e
         }
