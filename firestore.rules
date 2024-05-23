@@ -8,6 +8,7 @@ service cloud.firestore {
     
       match /calendars/{calendar} {
         allow create: if (userId == request.auth.uid) && (request.resource.data.size() == 2) && ('name' in request.resource.data) && ('color' in request.resource.data) && (request.resource.data['color'].matches('#[a-fA-F0-9]{6}$'))
+        allow list: if (userId == request.auth.uid)  
       }
 
       match /todolists/{list} {

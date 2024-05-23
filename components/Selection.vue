@@ -7,11 +7,11 @@
         focus:ring-[#395b66] outline-none ease-in duration-200
         invalid:border-red-500 invalid:text-red-500 focus:invalid:ring-red-600 invalid:ring-red-700 invalid:bg-red-900
         "
-                v-model="model" :id="id" :name="inputName" :placeholder="titleAbove ? '' : inputName">
-                <option :id="_option.id" v-for="_option in options">
-                    {{ _option.name }}
-                </option>
-                </select>
+                v-model="model" :id="id" :name="inputName" :placeholder="titleAbove ? '' : inputName" :required="required">
+            <option :value="_option.val" v-for="_option in options">
+                {{ _option.name }}
+            </option>
+        </select>
     </div>
 </template>
 
@@ -20,7 +20,8 @@ interface _props {
     inputName: string,
     id: string,
     titleAbove: boolean,
-    options: {name: string, id: string}[]
+    required: boolean,
+    options: {name: string, val: string}[]
 }
 const props = defineProps<_props>()
 const model = defineModel()

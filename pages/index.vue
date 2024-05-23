@@ -1,7 +1,7 @@
 <template>
 <main>
 <div :class="`${modal ? 'opacity-100 visible' : 'opacity-0 invisible'} flex place-content-center fixed z-10 h-screen w-screen duration-300 ease-in`" @click="modal = false">
-    <EventModal @click.stop/>
+    <EventModal @click.stop :dismiss-callback="() => {modal = false}" v-model="clickedDay" :month="currentMonth.monthNum" :year="currentMonth.year"/>
 </div>
 
 <div :class="`${modal ? 'blur-sm' : ''} grid h-screen grid-cols-5 grid-rows-12 duration-300`">
@@ -12,7 +12,7 @@
             </div>
             <div class="flex max-h-full col-span-4 col-start-2">
                 <div class="pl-4 my-auto">
-                    <Button :buttonText="currentMonth.month + ' | ' + currentMonth.year"/>
+                    <Button :buttonText="currentMonth.monthName + ' | ' + currentMonth.year"/>
                 </div>
                 <div class="flex ml-auto my-auto pr-2 gap-4">
                     <!-- <Button buttonText="settings"/> -->
@@ -37,7 +37,7 @@
             </div>
             <div class="grid size-full">
                 <div class="flex" v-for="week in currentMonth.days">
-                    <div class="border w-full cursor-pointer hover:bg-white hover:bg-opacity-10 duration-300" @click="modal = true" v-for="day in week">
+                    <div class="border w-full cursor-pointer hover:bg-white hover:bg-opacity-10 duration-300" @click="modal = true; clickedDay = day" v-for="day in week">
                         <p :class="`${day.currentMonth ? 'text-white' : 'text-grey-text'} text-right pr-2`">{{day.day}}</p> 
                     </div>
                 </div>
@@ -50,7 +50,6 @@
     
 <script setup lang="ts">
 const nuxt = useNuxtApp()
-const auth = nuxt.$auth
 const { redirectToLogIn, logOut } = useAuth()
 
 const { CalendarLogic }  = useCal()
@@ -60,6 +59,8 @@ const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Satur
 const timescale = ref("Month")
 const loading = ref<boolean>(true)
 const modal = ref<boolean>(false)
+
+const clickedDay = ref<CalendarDay>()
 
 onBeforeMount(async () => {
     // blur everything pre load? 
