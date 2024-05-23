@@ -1,4 +1,3 @@
-import { FirebaseError } from 'firebase/app';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, type AuthError, type User, AuthErrorCodes, onAuthStateChanged, signOut, deleteUser } from 'firebase/auth';
 import { addDoc, doc, setDoc, collection } from 'firebase/firestore'
 
@@ -68,6 +67,7 @@ export default function() {
     }
 
     return {
+        getCurrentUser,
         createAccount,
         logIn,
         redirectToLogIn,
