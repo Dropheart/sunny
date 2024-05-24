@@ -49,10 +49,8 @@ const clickedDay = defineModel<CalendarDay>()
 const modal = ref<boolean>(false)
 const timescale = ref("Month")
 
-
 onBeforeMount(async () => {
     // blur everything pre load? 
     if (await redirectToLogIn()) return;
 })
-
 </script>

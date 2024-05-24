@@ -20,7 +20,6 @@ interface _props {
 }
 const props = defineProps<_props>()
 
-
 const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 const clickedDay = defineModel<CalendarDay>()
 </script>
