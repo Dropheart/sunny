@@ -1,18 +1,18 @@
 <template>
     <div class="flex flex-col w-3/4 outline outline-2 outline-white my-auto p-10 space-y-2 rounded-3xl">
         <div class="w-1/2 pr-10">
-            <TextInput inputName="Event Name" id="eventName" type="text" :titleAbove="true"/>
+            <TextInput inputName="Event Name" id="eventName" type="text" :titleAbove="true" v-model="eventName"/>
         </div>
         <div class="flex w-full space-x-20">
             <TextInput inputName="Event start day" id="startDate" type="date" :titleAbove="true" v-model="startDate"/>
-            <TextInput inputName="Event start time" id="startTime" type="time" :titleAbove="true"/>
+            <TextInput inputName="Event start time" id="startTime" type="time" :titleAbove="true" v-model="startTime"/>
         </div>
         <div class="flex w-full space-x-20">
-            <TextInput inputName="Event end day" id="endDate" type="date" :titleAbove="true"/>
-            <TextInput inputName="Event end time" id="endTime" type="time" :titleAbove="true"/>
+            <TextInput inputName="Event end day" id="endDate" type="date" :titleAbove="true" v-model="endDate"/>
+            <TextInput inputName="Event end time" id="endTime" type="time" :titleAbove="true" v-model="endTime"/>
         </div>
         <div class="w-1/2 pr-10">
-            <Selection inputName="Calendar" id="cal" :titleAbove="true" :options="calendarOptions" :required="false"/>
+            <Selection inputName="Calendar" id="cal" :titleAbove="true" :options="calendarOptions" :required="false" v-model="selectedCalendar"/>
         </div>
         <div class="mx-auto pt-5 space-x-10">
             <Button buttonText="Confirm" @click="processClick"/>
@@ -32,7 +32,12 @@ interface _props {
 }
 const props = defineProps<_props>()
 const calendarDay = defineModel<CalendarDay>()
-const startDate = ref()
+const eventName = ref('')
+const startDate = ref('')
+const startTime = ref('')
+const endDate = ref('')
+const endTime = ref('')
+const selectedCalendar = ref('')
 
 watch(calendarDay, (newDay, oldDay) => {
     const _day = newDay!
@@ -52,10 +57,11 @@ onBeforeMount(async () => {
     calendars.forEach((data, cal) => {
         calendarOptions.value.push({ name: data.name, val: cal })
     })
+
+    selectedCalendar.value = calendarOptions.value[0].val
 })
 
 async function processClick() {
-    console.log(startDate.value)
     // props.dismissCallback()
 }
 
