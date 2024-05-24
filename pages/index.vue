@@ -32,16 +32,7 @@
             </div>
         </div>
         <div class="flex flex-col row-span-11 col-span-4 col-start-2">
-            <div class="flex">
-                <h1 class="border w-full text-center text-white py-1" v-for="day in weekDays"> {{ day }} </h1>
-            </div>
-            <div class="grid size-full">
-                <div class="flex" v-for="week in currentMonth.days">
-                    <div class="border w-full cursor-pointer hover:bg-white hover:bg-opacity-10 duration-300" @click="modal = true; clickedDay = day" v-for="day in week">
-                        <p :class="`${day.currentMonth ? 'text-white' : 'text-grey-text'} text-right pr-2`">{{day.day}}</p> 
-                    </div>
-                </div>
-            </div>
+            <CalendarMonthlyView :trigger-modal="() => {modal = true;}" :currentMonth="currentMonth" v-model="clickedDay"/>
         </div>
     </div>
 </div>
@@ -49,23 +40,19 @@
 </template>
     
 <script setup lang="ts">
-const nuxt = useNuxtApp()
 const { redirectToLogIn, logOut } = useAuth()
 
 const { CalendarLogic }  = useCal()
 const currentMonth = new CalendarLogic(new Date())
+const clickedDay = defineModel<CalendarDay>()
 
-const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-const timescale = ref("Month")
-const loading = ref<boolean>(true)
 const modal = ref<boolean>(false)
+const timescale = ref("Month")
 
-const clickedDay = ref<CalendarDay>()
 
 onBeforeMount(async () => {
     // blur everything pre load? 
     if (await redirectToLogIn()) return;
-    loading.value = false;
 })
 
 </script>
